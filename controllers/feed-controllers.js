@@ -33,6 +33,23 @@ const getPostById = async(req,res,next) => {
     res.status(200).json({feed});
 }
 
+const updatePost = async(req,res,next) => {
+    const { postId } = req.params;
+    const { title, description } = req.body;
+    const foundFeed;
+    try {
+        foundFeed = await Feed.update({title,description}, {
+            where: {
+                id: postId
+            }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    res.status(200).json({message: 'Feed Updated!', feed: foundFeed})
+}
+
 exports.posts = posts;
 exports.newPost = newPost;
 exports.getPostById = getPostById;
+exports.updatePost = updatePost;
