@@ -1,12 +1,15 @@
 const express = require('express');
 
-const db = require('./db/db');
+const sequelize = require('./db/db');
+
+const Feed = require('./models/feed-model');
 
 const feedRoutes = require('./routes/feed-routes');
 
 const app = express();
 
 app.use(express.json());
+
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -23,4 +26,7 @@ app.use((req, res, next) => {
 
 app.use('/posts', feedRoutes);
 
-app.listen(5000);
+sequelize.sync().then(result=>{
+  //console.log(result)
+  app.listen(5000);
+}).catch(error=>console.log(error));
