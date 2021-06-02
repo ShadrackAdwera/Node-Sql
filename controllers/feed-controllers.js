@@ -23,9 +23,14 @@ const newPost = async(req,res,next) => {
 }
 
 const getPostById = async(req,res,next) => {
-    let post;
+    let feed;
     const { postId } = req.params;
-    
+    try {
+        feed = await Feed.findByPk(postId);
+    } catch (error) {
+        console.log(error);
+    }
+    res.status(200).json({feed});
 }
 
 exports.posts = posts;
