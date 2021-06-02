@@ -1,16 +1,21 @@
 const Feed = require('../models/feed-model');
 
 const posts = async(req,res,next) => {
-    
+    let feeds;
+    try {
+        feeds = await Feed.findAll();
+    } catch (error) {
+        console.log(error);
+    }
+    res.status(200).json({feeds})
 }
 
 const newPost = async(req,res,next) => {
     const { title, description } = req.body;
     try {
-        const result = await Feed.create({
+        await Feed.create({
             title, description
         });
-        console.log(result);
     } catch (error) {
         console.log(error);
     }
