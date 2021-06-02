@@ -36,7 +36,7 @@ const getPostById = async(req,res,next) => {
 const updatePost = async(req,res,next) => {
     const { postId } = req.params;
     const { title, description } = req.body;
-    const foundFeed;
+    let foundFeed;
     try {
         foundFeed = await Feed.update({title,description}, {
             where: {
@@ -46,7 +46,7 @@ const updatePost = async(req,res,next) => {
     } catch (error) {
         console.log(error);
     }
-    res.status(200).json({message: 'Feed Updated!', feed: foundFeed})
+    res.status(200).json({message: 'Feed Updated!'})
 }
 
 exports.posts = posts;
