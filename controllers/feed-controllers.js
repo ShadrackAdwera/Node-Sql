@@ -31,7 +31,7 @@ const getPostById = async(req,res,next) => {
     } catch (error) {
         console.log(error);
     }
-    res.status(200).json({post})
+    res.status(200).json({post: post[0]})
 }
 
 exports.posts = posts;
